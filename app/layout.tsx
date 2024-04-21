@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +18,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <body className="flex flex-col min-h-screen m-0">
+      {/* Background image container */}
+      <div className="absolute w-full h-full z-negative bg-cover bg-center" style={{ backgroundImage: 'url(/cover2.jpg)' }} />
+
+     
+      <div className="flex flex-col flex-1 relative z-10">
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </div>
+    </body>
+  </html>
   );
 }
