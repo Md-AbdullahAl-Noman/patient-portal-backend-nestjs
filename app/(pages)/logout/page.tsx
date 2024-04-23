@@ -1,11 +1,11 @@
-import Login from '@/app/components/Login'
+import Logout from '@/app/components/Logout'
 
 import React from 'react'
 
 export default function page() {
   return (
     <div>
-      <Login/>
+      <Logout/>
     </div>
   )
 }

@@ -14,6 +14,7 @@ const config: Config = {
         'new-hoover': '#6b5ba5',
         'reg-bg': '#ffffffff',
         'signup-bg': '#0ebb95ff',
+        'logout': '#dd0202ff',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

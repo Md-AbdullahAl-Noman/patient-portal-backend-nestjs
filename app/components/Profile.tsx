@@ -15,10 +15,15 @@ type UserProfile = {
     updated_at?: string;
 };
 
+
+
 const ProfilePage = () => {
     const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
     const [error, setError] = useState('');
     const router = useRouter();
+
+   
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,8 +44,10 @@ const ProfilePage = () => {
             } catch (err:any) {
                 console.error('Error fetching profile:', err);
                 if (err.response && err.response.status === 401) {
+                    <div className="w-1/3 mx-auto text-center p-3 mt-4 rounded-md bg-red-500 text-white font-medium">
                     setError("Your session has expired. Please log in again.");
                     router.push('/login');
+                    </div>
                 } else {
                     setError('Failed to fetch profile');
                 }
@@ -54,8 +61,10 @@ const ProfilePage = () => {
     if (error) return <div className="text-red-500 text-center mt-4">{error}</div>;
 
     return (
+        <>
+        <div className="container mx-auto p-4 text-center text-xl font-bold text-green-500">Welcome to the patient portal {userProfile?.username} </div>
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Profile Page</h1>
+            <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Patient Profile</h1>
             <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg overflow-hidden">
                 {userProfile?.profilePicture ? (
                     <div className="relative w-full" style={{ height: '250px' }}> 
@@ -75,6 +84,8 @@ const ProfilePage = () => {
                 </div>
             </div>
         </div>
+        
+        </>
     );
 };
 

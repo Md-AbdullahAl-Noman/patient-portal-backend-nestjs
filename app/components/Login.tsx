@@ -23,7 +23,8 @@ export default function LoginPage() {
     try {
       const response = await axios.post(
         "http://localhost:3000/patient-auth/login",
-        data
+        data,
+        { withCredentials: true }  
       );
       console.log("Login successful:", response.data);
       localStorage.setItem("token", response.data.access_token);

@@ -48,7 +48,7 @@ export default function RegisterPatient() {
         }
       );
 
-      // Check only for the specific email error message
+      //email error message
       if (response.data.message === "Email address already exists") {
         console.error("Registration failed:", response.data.message);
         setRegistrationFailed(true);
@@ -56,8 +56,11 @@ export default function RegisterPatient() {
       } else {
         console.log("Registration successful:", response.data);
         setRegistrationSuccess(true);
-        setRegistrationMessage("Registration successful!");
-        reset(); // Reset form fields after successful submission
+        setRegistrationMessage("Registration successful!Please sign in");
+        reset({}, {
+          keepErrors: false, // to remove all errors
+         
+      });
       }
     } catch (error: any) {
       console.error("Registration failed:", error.message);
