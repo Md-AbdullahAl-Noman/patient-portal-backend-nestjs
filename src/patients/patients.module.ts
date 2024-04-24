@@ -8,10 +8,11 @@ import { Appointment } from './entities/appointment.entity';
 import { Doctor } from 'src/doctor/entities/doctor.entity';
 import { Note } from './entities/note.entity';
 import { Feedback } from './entities/feedback.entity';
+import { Consultation } from './entities/consultation.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Patient, Appointment,Doctor,Note,Feedback])],
+  imports: [TypeOrmModule.forFeature([Patient, Appointment,Doctor,Note,Feedback,Consultation])],
   controllers: [PatientsController],
   providers: [PatientsService], 
   exports: [PatientsService],

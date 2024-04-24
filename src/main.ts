@@ -20,7 +20,7 @@ async function bootstrap() {
     secret: 'noman-secret',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 120000 }, // For example, 2min
+    cookie: { maxAge: 120000 }, // For 2min
     
   }));
 

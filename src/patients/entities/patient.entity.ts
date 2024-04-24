@@ -1,8 +1,9 @@
 // src/patients/entities/patient.entity.ts
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToMany, ManyToMany } from 'typeorm';
 import { Appointment } from './appointment.entity';
 import { Note } from './note.entity';
 import { Feedback } from './feedback.entity';
+import { Consultation } from './consultation.entity';
 
 @Entity('patients')
 export class Patient {
@@ -36,5 +37,8 @@ export class Patient {
 
   @OneToMany(() => Feedback, feedback => feedback.patient)
   feedbacks: Feedback[];
+
+  @ManyToMany(() => Consultation, consultation => consultation.patients)
+  consultations: Consultation[];
 
 }

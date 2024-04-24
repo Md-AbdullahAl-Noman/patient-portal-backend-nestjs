@@ -7,7 +7,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class PatientAuthService {
   constructor(
-    private patientsService: PatientsService, // Use PatientsService for fetching patient data
+    private patientsService: PatientsService, 
     private jwtService: JwtService,
   ) {}
 

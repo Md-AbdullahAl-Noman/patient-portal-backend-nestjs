@@ -25,7 +25,7 @@ import { HospitalServicesModule } from './hospital-services/hospital-services.mo
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '12345',
+      password: '1234',
       database: 'PatientDB',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,

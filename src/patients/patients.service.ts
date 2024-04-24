@@ -13,6 +13,8 @@ import { Appointment } from './entities/appointment.entity';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { Note } from './entities/note.entity';
 import { Feedback } from './entities/feedback.entity';
+import { Consultation } from './entities/consultation.entity';
+import { CreateConsultationDto } from './dto/create-consultation.dto';
 
 @Injectable()
 export class PatientsService {
@@ -27,6 +29,8 @@ export class PatientsService {
     private readonly noteRepository: Repository<Note>,
     @InjectRepository(Feedback)
     private readonly feedbackRepository: Repository<Feedback>,
+    @InjectRepository(Consultation)
+    private consultationRepository: Repository<Consultation>,
     private mailerService: MailerService
   ) {}
 
@@ -154,7 +158,7 @@ async addNote(patientId: number, noteText: string): Promise<Note> {
     where: { id: patientId },
   });
   if (!patient) {
-    throw new NotFoundException(`Patient with ID ${patientId} not found`);
+    throw new NotFoundException(`Patient not found`);
   }
 
   const note = new Note();
@@ -169,7 +173,7 @@ async addNote(patientId: number, noteText: string): Promise<Note> {
 async addFeedback(patientId: number, feedbackMessage: string, rating: number): Promise<Feedback> {
   const patient = await this.patientsRepository.findOne({ where: { id: patientId } });
   if (!patient) {
-    throw new NotFoundException(`Patient with ID ${patientId} not found`);
+    throw new NotFoundException(`Patient id not found`);
   }
 
   const feedback = new Feedback();
@@ -180,10 +184,28 @@ async addFeedback(patientId: number, feedbackMessage: string, rating: number): P
   return this.feedbackRepository.save(feedback);
 }
 
+async addConsultation(patientId: number, doctorId: number, dto: CreateConsultationDto): Promise<Consultation> {
+  const patient = await this.patientsRepository.findOneOrFail({ where: { id: patientId } });
+  const doctor = await this.doctorRepository.findOneOrFail({ where: { id: doctorId } });
+
+  const consultation = new Consultation();
+  consultation.consultationDate = new Date(dto.consultationDate);
+  consultation.notes = dto.notes;
+  consultation.doctors = [doctor];
+  consultation.patients = [patient];
+
+  await this.consultationRepository.save(consultation);
+  return consultation;
+}
+
+
 
 
 
 }
+
+
+
 
 
 

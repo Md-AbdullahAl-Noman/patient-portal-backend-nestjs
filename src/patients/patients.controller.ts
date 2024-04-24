@@ -1,4 +1,4 @@
-// src/patients/patients.controller.ts
+
 import { Controller, Post, UseInterceptors, UploadedFile, Body, Param, ParseIntPipe, Get, ConflictException, UsePipes, ValidationPipe, UseGuards, Patch, Delete } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -13,6 +13,7 @@ import { CreateNoteDto } from './dto/create-note.dto';
 import { Note } from './entities/note.entity';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from './entities/feedback.entity';
+import { CreateConsultationDto } from './dto/create-consultation.dto';
 
 @Controller('patients')
 export class PatientsController {
@@ -116,6 +117,16 @@ async addFeedback(
   @Body() createFeedbackDto: CreateFeedbackDto 
 ): Promise<Feedback> {
   return this.patientsService.addFeedback(patientId, createFeedbackDto.feedback_message, createFeedbackDto.rating);
+}
+
+
+@Post('/consultation/:patientId/:doctorId')
+addConsultation(
+  @Param('patientId') patientId: number,
+  @Param('doctorId') doctorId: number,
+  @Body() createConsultationDto: CreateConsultationDto,
+) {
+  return this.patientsService.addConsultation(patientId, doctorId, createConsultationDto);
 }
 
 }
