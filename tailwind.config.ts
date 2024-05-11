@@ -15,6 +15,7 @@ const config: Config = {
         'reg-bg': '#ffffffff',
         'signup-bg': '#0ebb95ff',
         'logout': '#dd0202ff',
+        "pass":" #dd7702ff"
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

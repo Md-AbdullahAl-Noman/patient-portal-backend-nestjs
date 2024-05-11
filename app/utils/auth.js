@@ -13,6 +13,10 @@ const isAuthenticated = async () => {
     };
   } catch (error) {
     console.log("Failed to check authentication:", error);
+    setTimeout(() => {
+      localStorage.removeItem('userId');
+      localStorage.removeItem('token');
+    }, 6000); 
     return {
       isAuthenticated: false,
       userId: null
